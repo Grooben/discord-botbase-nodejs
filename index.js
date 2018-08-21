@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const fs = require("fs");
 let config;
 
-console.log("Starting WangBot");
+console.log("Starting Bot");
 console.log("Loading config.json");
 
 //Try to read from config.json, if we fail, show a friendly error, with debugging information for pros.

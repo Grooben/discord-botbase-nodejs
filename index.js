@@ -25,15 +25,27 @@ client.on("ready", function(){
 });
 
 client.on("message", async message =>{
+    const commandEmbed = new Discord.RichEmbed()
+      .setTitle("Commands List")
+      .setAuthor(`${client.user.username}`, `${client.user.avatarURL}`)
+      .setColor(0x4295f4)
+      .setDescription(`By now, you've probably worked out you need to start a command with "${prefix}"`)
+      .setFooter(`A message brought to you by ${client.user.username}`, `${client.user.avatarURL}`)
+      .addField("command", "Get to this list here!")
+      .addField("ping", "Returns a message showing ping and API latency!")
+      .addField("Playing Numberwang", `${client.user.username} listens for numbers and automagically passes them on to Coloson to determine their Numberwangity!`);
+  
     if (message.author.bot) return;
     if (message.content.indexOf(prefix)!==0) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     if (command == "ping"){
         const msg = await message.channel.send("Ping?");
-        m.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+        msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
     }
-
+    else if (command == "command"){
+      message.channel.send(commandEmbed);
+    }
 });
 
 client.login(token);
